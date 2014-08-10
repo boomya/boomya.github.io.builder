@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JDK-ArrayList | BOOMYA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ArrayList 是最常用的容器类,内部实现是看名字就知道是用的数组,一直再用从来没有看过内部的实现细节,今天学习一下.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK-ArrayList">
+<meta property="og:url" content="http://yoursite.com/2014/08/09/jdk-arraylist/">
+<meta property="og:site_name" content="BOOMYA">
+<meta property="og:description" content="ArrayList 是最常用的容器类,内部实现是看名字就知道是用的数组,一直再用从来没有看过内部的实现细节,今天学习一下.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDK-ArrayList">
+<meta name="twitter:description" content="ArrayList 是最常用的容器类,内部实现是看名字就知道是用的数组,一直再用从来没有看过内部的实现细节,今天学习一下.">
+
+  
+    <link rel="alternative" href="/atom.xml" title="BOOMYA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">BOOMYA</a>
+    <div class="collapse navbar-collapse nav-menu">
+      <ul class="nav navbar-nav">
+      
+        <li>
+          <a href="/archives">
+            <i class="fa fa-archive"></i>
+            Archives
+          </a>
+        </li>
+      
+        <li>
+          <a href="/categories">
+            <i class="fa fa-folder"></i>
+            Categories
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags">
+            <i class="fa fa-tags"></i>
+            Tags
+          </a>
+        </li>
+      
+        <li>
+          <a href="/wiki">
+            <i class="fa fa-book"></i>
+            Wiki
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about">
+            <i class="fa fa-user"></i>
+            About
+          </a>
+        </li>
+      
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a id="rss-link" href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="clearfix"></div>
+
+      <div id='content' class="container">
+
+        <div class="page-header-wrapper">
+          <!--[if lt IE 9]><div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>提示:</strong>您的浏览器版本太低了,建议升级到 <strong><a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" title="IE9">IE9</a></strong> 以上,本站使用<a href="https://www.google.com/intl/zh-CN/chrome/">Chrome浏览器</a>可以获得最好的显示效果.</div><![endif]-->
+          <div class="page-header">
+            <h1 class="title">
+          
+            JDK-ArrayList
+          
+            </h1>
+        </div>
+      </div>
+      
+      <section id="main"
+        
+      ><article id="post-c5e3zeatuomrjnk1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="toc"><span class="toc-header">Contents</span><ol class="article-toc"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#1.关于遍历"><span class="article-toc-text">1.关于遍历</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#2.concurrentmodificationexception"><span class="article-toc-text">2.ConcurrentModificationException</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#3.自动扩容"><span class="article-toc-text">3.自动扩容</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#4.unsupportedoperationexception"><span class="article-toc-text">4.UnsupportedOperationException</span></a></li></ol></div><p>ArrayList 是最常用的容器类,内部实现是看名字就知道是用的数组,一直再用从来没有看过内部的实现细节,今天学习一下.
+<a id="more"></a>
+<em>ArrayList</em> 是最常用的容器类,内部实现是看名字就知道是用的数组,一直再用从来没有看过内部的实现细节,今天学习一下.
+打开 <em>ArrayList</em> 最开始的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Object[] elementData;</div></pre></td></tr></table></figure>
+
+<p>果然是通过数组来保存数据.<br><strong>transient</strong> 是指明这个变量不要被序列化.</p>
+<h3 id="1.关于遍历">1.关于遍历</h3><p>常用的遍历的方法就是创建迭代器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;String&gt; it = list.iterator();</div><div class="line"><span class="keyword">while</span>(it.hasNext()){</div><div class="line">    String s = it.next();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+<p>还有一种迭代器 <em>ListIterator</em> ,他继承了 <em>Iterator</em> ,除了有常规迭代器的方法还有 <em>hasPrevious()</em> 和 <em>previous()</em> 方法,提供了向前遍历.</p>
+<h3 id="2.concurrentmodificationexception">2.ConcurrentModificationException</h3><p>在操作 <em>ArrayList</em> 时经常会发生 <em>ConcurrentModificationException</em> ,比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;String&gt; it = list.iterator();</div><div class="line"><span class="keyword">while</span>(it.hasNext()){</div><div class="line">    String s = it.next();</div><div class="line">    list.remove(s); <span class="comment">//list.add(s);</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>在遍历 <em>ArrayList</em> 过程中执行移除或添加的操作就会抛出 <em>ConcurrentModificationException</em> .在 <em>ArrayList</em> 在父类 <em>AbstractList</em> 有一个变量 <em>modCount</em> ,这个值在 <em>ArrayList</em> 执行移除或者添加方法时会执行 <em>modCount++</em> 操作,在创建迭代器时 <code>Iterator&lt;String&gt; it = list.iterator();</code> 会把 <em>modCount</em> 传入到迭代器中并保存一份副本 <code>int expectedModCount = modCount;</code>,迭代器在遍历过程中调用 <em>next()</em> 方法时会执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="keyword">void</span> checkForComodification() {</div><div class="line">	<span class="keyword">if</span> (modCount != expectedModCount)</div><div class="line">	    <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>因为在遍历过程中执行了移除或者添加方法,改变了 <em>modCount</em> 的值,所以 <em>modCount</em> 和 <em>expectedModCount</em> 不匹配,抛出 <em>ConcurrentModificationException</em> .<br>解决方案:  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;String&gt; it = list.iterator();</div><div class="line"><span class="keyword">while</span>(it.hasNext()){</div><div class="line">    String s = it.next();</div><div class="line">    it.remove(); </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>将移除方法改为迭代器的移除方法,就不会抛出异常,因为 <em>it.remove()</em> 是通过当前的索引移除,并且在移除后会用最新的 <em>modCount</em> 更新 <em>expectedModCount</em> ,所以不会抛出异常.
+还有一种解决方案,是在遍历过程中将需要移除掉的元素保存到一个临时的ArrayList中,在遍历完成后,执行 <em>removeAll</em> 方法. </p>
+<h3 id="3.自动扩容">3.自动扩容</h3><p>ArrayList是没有长度限制的,但是他内部的存储结构是数组,数组是需要固定长度的.ArrayList在添加一个元素的时候会判断是否已经大于当前数组的长度,如果大于,会创建一个新的数组,长度是当前数组长度的1.5倍,再将当前数据复制到新数组中.  </p>
+<h3 id="4.unsupportedoperationexception">4.UnsupportedOperationException</h3><p>UnsupportedOperationException这个异常也很常见,在 <em>ArrayList</em> 的父类 <em>AbstractList</em> 定义了很多方法,方法体就是抛出 <em>UnsupportedOperationException</em> ,如果子类没有重写这个方法,调用的时候就会抛出这个异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> E <span class="title">remove</span>(<span class="keyword">int</span> index) {</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这更像是一种编程技巧,可能会有这样一种场景,多个子类继承同一个父类,而子类之间的行为有可能不是全部相同或者说全部支持,通过上面这种方式处理,约定好一种 <em>exception</em> ,处理起来更加的优雅,易理解.</p>
+
+      
+    </div>
+  </div>
+</article>
+
+
+</section>
+        
+          
+<aside id="sidebar">
+  
+    
+      
+<div class="widget-wrap center">
+  <ul class="pagination">
+    <li>
+      
+        <a href="/2014/08/10/jdk-hashmap/" class="nav-prev">Prev</a>
+      
+    </li>
+    <li>
+      <a data-url="http://yoursite.com/2014/08/09/jdk-arraylist/" data-id="c5e3zeatuomrjnk1" data_title="JDK-ArrayList"
+        data_summary="ArrayList 是最常用的容器类,内部实现是看名字就知道是用的数组,一直再用从来没有看过内部的实现细节,今天学习一下.
+
+ArrayList 是最常用的容器类,内部实现是看名字就知道是..." class="article-share-link">Share</a>
+    </li>
+    <li>
+      
+        <span class="nav-next disabled">Next</span>
+      
+    </li>
+  </ul>
+</div>
+
+
+    
+      <div class="widget-wrap">
+  <div class="post-widget">
+    <i class="fa fa-clock-o"></i>
+    <time datetime="2014-08-09T12:59:33.000Z" itemprop="datePublished">Aug 9 2014</time>
+  </div>
+</div>
+
+    
+      
+  <div class="widget-wrap">
+    <div class="post-widget">
+      <i class="fa fa-folder"></i>
+      <a class="category-link" href="/categories/JDK源码/">JDK源码<span class="category-count">2</span></a>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="post-widget">
+      <i class="fa fa-tags"></i>
+      <a class="tag-link" href="/tags/ArrayList/">ArrayList<span class="tag-count">1</span></a><a class="tag-link" href="/tags/JDK/">JDK<span class="tag-count">2</span></a>
+    </div>
+  </div>
+
+
+    
+  
+</aside>
+
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer container">
+    <div id="footer-info" class="inner">
+      <a href="/">BOOMYA</a> &copy; 2014 Powered by <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/seff/nut" target="_blank">Nut</a>
+    </div>
+  </div>
+</footer>
+<a id="gotop" href="#">
+  <i class="fa fa-chevron-up"></i>
+</a>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="[object Object]" class="mobile-nav-link">0</a>
+  
+    <a href="[object Object]" class="mobile-nav-link">1</a>
+  
+    <a href="[object Object]" class="mobile-nav-link">2</a>
+  
+    <a href="[object Object]" class="mobile-nav-link">3</a>
+  
+    <a href="[object Object]" class="mobile-nav-link">4</a>
+  
+</nav>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/jquery.fitvids.js" type="text/javascript"></script>
+
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>synchronized的简单用法 | BOOMYA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简单说明下synchronized常用的场景以及用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="synchronized的简单用法">
+<meta property="og:url" content="http://yoursite.com/2014/08/10/synchronized/">
+<meta property="og:site_name" content="BOOMYA">
+<meta property="og:description" content="简单说明下synchronized常用的场景以及用法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="synchronized的简单用法">
+<meta name="twitter:description" content="简单说明下synchronized常用的场景以及用法">
+
+  
+    <link rel="alternative" href="/atom.xml" title="BOOMYA" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">BOOMYA</a>
+    <div class="collapse navbar-collapse nav-menu">
+      <ul class="nav navbar-nav">
+      
+        <li>
+          <a href="/archives">
+            <i class="fa fa-archive"></i>
+            Archives
+          </a>
+        </li>
+      
+        <li>
+          <a href="/categories">
+            <i class="fa fa-folder"></i>
+            Categories
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tags">
+            <i class="fa fa-tags"></i>
+            Tags
+          </a>
+        </li>
+      
+        <li>
+          <a href="/wiki">
+            <i class="fa fa-book"></i>
+            Wiki
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about">
+            <i class="fa fa-user"></i>
+            About
+          </a>
+        </li>
+      
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a id="rss-link" href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="clearfix"></div>
+
+      <div id='content' class="container">
+
+        <div class="page-header-wrapper">
+          <!--[if lt IE 9]><div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>提示:</strong>您的浏览器版本太低了,建议升级到 <strong><a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" title="IE9">IE9</a></strong> 以上,本站使用<a href="https://www.google.com/intl/zh-CN/chrome/">Chrome浏览器</a>可以获得最好的显示效果.</div><![endif]-->
+          <div class="page-header">
+            <h1 class="title">
+          
+            synchronized的简单用法
+          
+            </h1>
+        </div>
+      </div>
+      
+      <section id="main"
+        
+      ><article id="post-c2g2vyr66rge2l1o" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>简单说明下synchronized常用的场景以及用法
+<a id="more"></a>
+synchronized可作用于instance变量、object reference（对象引用）、static函数和class literals(类名称字面常量).<br>有几个需要注意的地方</p>
+<ul>
+<li>无论synchronized关键字加在方法上还是对象上，他取得的锁都是对象，而不是把一段代码或函数当作锁,而且同步方法很可能还会被其他线程的对象访问。 </li>
+<li>每个对象只有一个锁（lock）和之相关联。 </li>
+<li><p>实现同步是要很大的系统开销作为代价的，甚至可能造成死锁，所以尽量避免无谓的同步控制。  </p>
+</li>
+<li><p><strong>把synchronized当作函数修饰符时</strong>  </p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method</span>(){   </div><div class="line">    <span class="comment">//......  </span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>他锁定的是调用这个同步方法对象。也就是说，当一个对象P1在不同的线程中执行这个同步方法时，他们之间会形成互斥，达到同步的效果。但是这个对象所属的Class所产生的另一对象P2却能够任意调用这个被加了synchronized关键字的方法。<br>上边的示例代码等同于如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span>() {   </div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>){      <span class="comment">//  (a)     </span></div><div class="line">     <span class="comment">//......  </span></div><div class="line">    }   </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>(a)处的this指的是什么呢？他指的就是调用这个方法的对象，如P1。可见同步方法实质是将synchronized作用于object reference。那个拿到了P1对象锁的线程，才能够调用P1的同步方法，而对P2而言，P1这个锁和他毫不相干，程式也可能在这种情形下摆脱同步机制的控制，造成数据混乱。  </p>
+<ol>
+<li><strong>同步块</strong>  </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span>(SomeObject so) {   </div><div class="line"> <span class="keyword">synchronized</span>(so) {   </div><div class="line">  <span class="comment">//......   </span></div><div class="line"> }   </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这时，锁就是so这个对象，谁拿到这个锁谁就能够运行他所控制的那段代码。当有一个明确的对象作为锁时，就能够这样写程式，但当没有明确的对象作为锁，只是想让一段代码同步时，能够创建一个特别的instance变量（他得是个对象）来充当锁：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class Foo implements Runnable{   </div><div class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] lock = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>];  <span class="comment">// 特别的instance变量   </span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span>() {   </div><div class="line">        <span class="keyword">synchronized</span>(lock) { <span class="comment">//...... }   </span></div><div class="line">    }   </div><div class="line">	<span class="comment">//......   </span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><strong>注：零长度的byte数组对象创建起来将比任何对象都经济――查看编译后的字节码：生成零长度的byte[]对象只需3条操作码，而Object lock = new Object()则需要7行操作码。</strong></p>
+<ol>
+<li><strong>将synchronized作用于static函数</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Foo {   </div><div class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method1</span>(){   <span class="comment">// 同步的static 函数      </span></div><div class="line">  <span class="comment">//......   </span></div><div class="line"> }   </div><div class="line"> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span>(){   </div><div class="line">        <span class="keyword">synchronized</span>(Foo.class)   <span class="comment">//  class literal(类名称字面常量)   </span></div><div class="line"> }   </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;代码中的method2()方法是把class literal作为锁的情况，他和同步的static函数产生的效果是相同的，取得的锁很特别，是当前调用这个方法的对象所属的类（Class，而不再是由这个Class产生的某个具体对象了）.<br>&emsp;&emsp;记得在《Effective Java》一书中看到过将 Foo.class和 P1.getClass()用于作同步锁还不相同，不能用P1.getClass()来达到锁这个Class的目的。P1指的是由Foo类产生的对象。<br>&emsp;&emsp;能够推断：假如一个类中定义了一个synchronized的static函数A，也定义了一个synchronized 的instance函数B，那么这个类的同一对象Obj在多线程中分别访问A和B两个方法时，不会构成同步，因为他们的锁都不相同。A方法的锁是Obj所属的那个Class，而B的锁是Obj所属的这个对象。</p>
+
+      
+    </div>
+  </div>
+</article>
+
+
+</section>
+        
+          
+<aside id="sidebar">
+  
+    
+      
+<div class="widget-wrap center">
+  <ul class="pagination">
+    <li>
+      
+        <span class="nav-prev disabled">Prev</span>
+      
+    </li>
+    <li>
+      <a data-url="http://yoursite.com/2014/08/10/synchronized/" data-id="c2g2vyr66rge2l1o" data_title="synchronized的简单用法"
+        data_summary="简单说明下synchronized常用的场景以及用法
+
+synchronized可作用于instance变量、object reference（对象引用）、static函数和class literals(类名称字面常量).有几个需要注..." class="article-share-link">Share</a>
+    </li>
+    <li>
+      
+        <a href="/2014/08/10/jvm-debug/" class="nav-next">Next</a>
+      
+    </li>
+  </ul>
+</div>
+
+
+    
+      <div class="widget-wrap">
+  <div class="post-widget">
+    <i class="fa fa-clock-o"></i>
+    <time datetime="2014-08-10T13:04:01.000Z" itemprop="datePublished">Aug 10 2014</time>
+  </div>
+</div>
+
+    
+      
+  <div class="widget-wrap">
+    <div class="post-widget">
+      <i class="fa fa-folder"></i>
+      <a class="category-link" href="/categories/java/">java<span class="category-count">1</span></a>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="post-widget">
+      <i class="fa fa-tags"></i>
+      <a class="tag-link" href="/tags/java/">java<span class="tag-count">1</span></a><a class="tag-link" href="/tags/synchronized/">synchronized<span class="tag-count">1</span></a>
+    </div>
+  </div>
+
+
+    
+  
+</aside>
+
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer container">
+    <div id="footer-info" class="inner">
+      <a href="/">BOOMYA</a> &copy; 2014 Powered by <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/seff/nut" target="_blank">Nut</a>
+    </div>
+  </div>
+</footer>
+<a id="gotop" href="#">
+  <i class="fa fa-chevron-up"></i>
+</a>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="[object Object]" class="mobile-nav-link">0</a>
+  
+    <a href="[object Object]" class="mobile-nav-link">1</a>
+  
+    <a href="[object Object]" class="mobile-nav-link">2</a>
+  
+    <a href="[object Object]" class="mobile-nav-link">3</a>
+  
+    <a href="[object Object]" class="mobile-nav-link">4</a>
+  
+</nav>
+
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/jquery.fitvids.js" type="text/javascript"></script>
+
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>

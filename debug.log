@@ -1,0 +1,58 @@
+date: "2014-08-10 20:21:51.388"
+argv: node /usr/local/bin/hexo g
+os: Darwin 14.0.0 darwin x64
+versions:
+  http_parser: "1.0"
+  node: 0.10.28
+  v8: 3.14.5.9
+  ares: 1.9.0-DEV
+  uv: 0.10.27
+  zlib: 1.2.3
+  modules: "11"
+  openssl: 1.0.1g
+  hexo: 2.8.1
+---
+[debug] 20:21:50.870 Config file loaded from /Users/jiangshan/develop/learn/boomya.github.io.builder/_config.yml[debug] 20:21:50.881 Version info checked successfully[debug] 20:21:50.903 Loading database.[debug] 20:21:50.941 Processed: draft.md (2ms)[debug] 20:21:50.941 Processed: page.md (2ms)[debug] 20:21:50.943 Processed: post.md (3ms)[debug] 20:21:50.943 Processed: photo.md (4ms)[debug] 20:21:50.984 Plugin loaded successfully: hexo-renderer-ejs[debug] 20:21:51.004 Plugin loaded successfully: hexo-renderer-marked[debug] 20:21:51.272 Plugin loaded successfully: hexo-renderer-stylus[debug] 20:21:51.274 Script load successfully: extend.generator.js[error] 20:21:51.279 HexoError: Script load failed: extend.helper.js
+Error: Cannot find module 'lodash'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (/Users/jiangshan/develop/learn/boomya.github.io.builder/themes/nut/scripts/extend.helper.js:1:71)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.require (module.js:364:17)
+[error] 20:21:51.284 HexoError: Script load failed: extend.renderer.js
+Error: Cannot find module 'marked'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (/Users/jiangshan/develop/learn/boomya.github.io.builder/themes/nut/scripts/extend.renderer.js:1:76)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.require (module.js:364:17)
+[debug] 20:21:51.285 Script load successfully: extend.tag.js[debug] 20:21:51.285 Script load successfully: fancybox.js[debug] 20:21:51.318 Processed: _posts/jdk-arraylist.md (6ms)[debug] 20:21:51.319 Processed: about/index.md (1ms)[debug] 20:21:51.324 Processed: source/js/bootstrap.min.js (1ms)[debug] 20:21:51.324 Processed: source/js/jquery.fitvids.js (0ms)[debug] 20:21:51.324 Processed: source/js/script.js (0ms)[debug] 20:21:51.324 Processed: source/fancybox/blank.gif (0ms)[debug] 20:21:51.324 Processed: source/fancybox/fancybox_loading.gif (0ms)[debug] 20:21:51.325 Processed: source/fancybox/fancybox_loading@2x.gif (1ms)[debug] 20:21:51.325 Processed: source/fancybox/fancybox_overlay.png (0ms)[debug] 20:21:51.325 Processed: source/fancybox/fancybox_sprite.png (0ms)[debug] 20:21:51.325 Processed: source/fancybox/fancybox_sprite@2x.png (0ms)[debug] 20:21:51.325 Processed: source/fancybox/jquery.fancybox.css (0ms)[debug] 20:21:51.325 Processed: source/fancybox/jquery.fancybox.js (0ms)[debug] 20:21:51.325 Processed: source/fancybox/jquery.fancybox.pack.js (0ms)[debug] 20:21:51.326 Processed: source/fancybox/helpers/fancybox_buttons.png (1ms)[debug] 20:21:51.326 Processed: source/fancybox/helpers/jquery.fancybox-buttons.css (0ms)[debug] 20:21:51.326 Processed: source/fancybox/helpers/jquery.fancybox-buttons.js (0ms)[debug] 20:21:51.326 Processed: source/fancybox/helpers/jquery.fancybox-media.js (0ms)[debug] 20:21:51.326 Processed: source/fancybox/helpers/jquery.fancybox-thumbs.css (0ms)[debug] 20:21:51.326 Processed: source/fancybox/helpers/jquery.fancybox-thumbs.js (0ms)[debug] 20:21:51.327 Processed: source/css/_extend.styl (1ms)[debug] 20:21:51.327 Processed: source/css/_variables.styl (0ms)[debug] 20:21:51.327 Processed: source/css/bootstrap.min.css (0ms)[debug] 20:21:51.327 Processed: source/css/font-awesome.min.css (0ms)[debug] 20:21:51.327 Processed: source/css/style.styl (0ms)[debug] 20:21:51.328 Processed: source/css/_partial/archive.styl (1ms)[debug] 20:21:51.328 Processed: source/css/_partial/article.styl (0ms)[debug] 20:21:51.328 Processed: source/css/_partial/cat-tag.styl (0ms)[debug] 20:21:51.328 Processed: source/css/_partial/comment.styl (0ms)[debug] 20:21:51.328 Processed: source/css/_partial/footer.styl (0ms)[debug] 20:21:51.328 Processed: source/css/_partial/header.styl (0ms)[debug] 20:21:51.328 Processed: source/css/_partial/highlight.styl (0ms)[debug] 20:21:51.328 Processed: source/css/_partial/mobile.styl (0ms)[debug] 20:21:51.328 Processed: source/css/_partial/sidebar-aside.styl (0ms)[debug] 20:21:51.329 Processed: source/css/_partial/sidebar-bottom.styl (1ms)[debug] 20:21:51.329 Processed: source/css/_partial/sidebar.styl (0ms)[debug] 20:21:51.329 Processed: source/css/_partial/wiki.styl (0ms)[debug] 20:21:51.329 Processed: source/css/_util/grid.styl (0ms)[debug] 20:21:51.329 Processed: source/css/_util/mixin.styl (0ms)[debug] 20:21:51.329 Processed: source/css/fonts/fontawesome-webfont.eot (0ms)[debug] 20:21:51.329 Processed: source/css/fonts/FontAwesome.otf (0ms)[debug] 20:21:51.329 Processed: source/css/fonts/fontawesome-webfont.svg (0ms)[debug] 20:21:51.330 Processed: source/css/fonts/fontawesome-webfont.ttf (1ms)[debug] 20:21:51.331 Processed: source/css/fonts/fontawesome-webfont.woff (1ms)[debug] 20:21:51.335 Processed: layout/archive.ejs (16ms)[debug] 20:21:51.336 Processed: layout/layout.ejs (16ms)[debug] 20:21:51.336 Processed: layout/category.ejs (16ms)[debug] 20:21:51.336 Processed: layout/index.ejs (16ms)[debug] 20:21:51.336 Processed: layout/page.ejs (16ms)[debug] 20:21:51.336 Processed: layout/tag.ejs (16ms)[debug] 20:21:51.336 Processed: layout/post.ejs (16ms)[debug] 20:21:51.336 Processed: layout/wiki.ejs (16ms)[debug] 20:21:51.336 Processed: layout/_widget/archive.ejs (16ms)[debug] 20:21:51.336 Processed: layout/_widget/blogroll.ejs (16ms)[debug] 20:21:51.336 Processed: layout/_widget/category.ejs (16ms)[debug] 20:21:51.336 Processed: layout/_widget/nav.ejs (16ms)[debug] 20:21:51.336 Processed: layout/_widget/post_category.ejs (15ms)[debug] 20:21:51.336 Processed: layout/_widget/post_date.ejs (15ms)[debug] 20:21:51.336 Processed: layout/_widget/post_tag.ejs (15ms)[debug] 20:21:51.336 Processed: layout/_widget/recent_posts.ejs (15ms)[debug] 20:21:51.336 Processed: layout/_widget/search.ejs (15ms)[debug] 20:21:51.336 Processed: layout/_widget/tagcloud.ejs (15ms)[debug] 20:21:51.336 Processed: layout/_widget/tag.ejs (15ms)[debug] 20:21:51.336 Processed: layout/_partial/after-footer.ejs (15ms)[debug] 20:21:51.336 Processed: layout/_partial/archive-post.ejs (14ms)[debug] 20:21:51.336 Processed: layout/_partial/archive.ejs (14ms)[debug] 20:21:51.336 Processed: layout/_partial/article.ejs (14ms)[debug] 20:21:51.336 Processed: layout/_partial/category.ejs (14ms)[debug] 20:21:51.336 Processed: layout/_partial/footer.ejs (14ms)[debug] 20:21:51.336 Processed: layout/_partial/google-analytics.ejs (14ms)[debug] 20:21:51.336 Processed: layout/_partial/header.ejs (14ms)[debug] 20:21:51.336 Processed: layout/_partial/head.ejs (14ms)[debug] 20:21:51.336 Processed: layout/_partial/mobile-nav.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/sidebar.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/tag.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/wiki-toc.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/post/date.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/wiki.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/post/nav.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/post/category.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/post/gallery.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/post/tag.ejs (13ms)[debug] 20:21:51.336 Processed: layout/_partial/post/title.ejs (13ms)[debug] 20:21:51.338 Theme config loaded[debug] 20:21:51.338 Processed: _config.yml (19ms)[debug] 20:21:51.346 Generator: archive (3ms)[debug] 20:21:51.346 Generator: category (0ms)[debug] 20:21:51.347 Generator: home (1ms)[debug] 20:21:51.347 Generator: page (0ms)[debug] 20:21:51.348 Generator: post (1ms)[debug] 20:21:51.349 Generator: tag (1ms)[debug] 20:21:51.356 Generator: generator-0 (0ms)[debug] 20:21:51.356 Generator: generator-1 (0ms)[debug] 20:21:51.356 Generator: generator-2 (0ms)[debug] 20:21:51.356 Generator: generator-3 (0ms)[debug] 20:21:51.358 Generator: asset (9ms)[info] 20:21:51.358 Files loaded in 0.072s[debug] 20:21:51.360 Render archive: archives/[error] 20:21:51.385 HexoError: Render failed: archives/index.html
+ReferenceError: /Users/jiangshan/develop/learn/boomya.github.io.builder/themes/nut/layout/layout.ejs:38
+    36|         </div>
+    37|       </div>
+ >> 38|       <% if (is_wiki() && page.path !== theme.wiki_dir + '/'){ %>
+    39|         <%- partial('_partial/wiki-toc') %>
+    40|       <% } %>
+    41|       <section id="main"
+
+is_wiki is not defined
+    at eval (eval at <anonymous> (/Users/jiangshan/develop/learn/boomya.github.io.builder/node_modules/hexo-renderer-ejs/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:30:1696)
+    at eval (eval at <anonymous> (/Users/jiangshan/develop/learn/boomya.github.io.builder/node_modules/hexo-renderer-ejs/node_modules/ejs/lib/ejs.js:242:14), <anonymous>:30:2749)
+    at /Users/jiangshan/develop/learn/boomya.github.io.builder/node_modules/hexo-renderer-ejs/node_modules/ejs/lib/ejs.js:255:15
+    at Object.exports.render (/Users/jiangshan/develop/learn/boomya.github.io.builder/node_modules/hexo-renderer-ejs/node_modules/ejs/lib/ejs.js:293:13)
+    at /Users/jiangshan/develop/learn/boomya.github.io.builder/node_modules/hexo-renderer-ejs/index.js:5:14
+    at /usr/local/lib/node_modules/hexo/lib/extend/renderer.js:78:38
+    at b (domain.js:183:18)
+    at Domain.run (domain.js:123:23)
+    at store.(anonymous function) (/usr/local/lib/node_modules/hexo/lib/extend/renderer.js:77:9)
+    at /usr/local/lib/node_modules/hexo/lib/core/render.js:96:9
