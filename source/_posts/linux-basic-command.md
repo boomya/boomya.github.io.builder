@@ -1,7 +1,7 @@
 title: linux-basic-command
 date: 2014-12-29 15:57:03
 categories: linux
-tags: ['linux', 'command']
+tags: ['linux', 'command', '日常']
 description:
 ---
 linux下必须要掌握的基本命令
