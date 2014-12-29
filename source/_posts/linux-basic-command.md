@@ -1,4 +1,4 @@
-title: linux-basic-command
+title: linux基本命令
 date: 2014-12-29 15:57:03
 categories: linux
 tags: ['linux', 'command', '日常']
