@@ -70,3 +70,31 @@ http://localhost:7574/solr/collection1/select?q=*:*
 搜索的过程是会搜索每一个分片,再将每个分片的结果组合返回.
 **note:** 如果带上参数*distrib=false*只会返回指定分片的结果
 
+###场景2:使用外部zookeeper启动SolrCloud集群
+---
+#####执行步骤:
+>1. 启动外部zookeeper服务
+>2. 启动SolrCloud并指向外部zookeeper服务器
+
+#####操作流程:
+**note:**使用外部zookeeper服务之前,需要删除节点目录下solr/zoo_data文件夹
+启动第一个节点:
+
+~~~sh
+cd node1
+java -DnumShards=2 -Dbootstrap_confdir=./solr/collection1/conf \
+   -Dcollection.configName=myconf \
+   -DzkHost=localhost:2181,localhost:2182,localhost:2183 \
+   -jar start.jar
+~~~
+**note:**参数的顺序是有要求的.DzkHost必须要在zookeeper相关参数的后面.
+
+启动其他节点:
+
+~~~sh
+cd node2
+java -Djetty.port=8900 -DzkRun -DnumShards=2 \
+    -DzkHost=localhost:2181,localhost:2182,localhost:2183 -jar start.jar
+~~~
+验证SolrCloud启动是否成功,访问http://localhost:8983/solr/#/~cloud.
+
