@@ -1,17 +1,17 @@
 title: react-tutorial-1  
-date: 2015-08-20 10:01:42  
+date: 2015-08-23 10:01:42  
 categories: react  
 tags: ['react','javascript','前端']  
 description:
 ---
 react入门教程-1
 <!--more-->
-### 环境搭建
-> 需要安装
-> 1. homebrew
-> 2. node
-> 3. bower  
-
+### 环境搭建  
+需要安装  
+1. homebrew
+2. node
+3. bower  
+<br />
 ``` sh
 mkdir react-tutorial-1
 bower install react
@@ -58,7 +58,6 @@ touch index.html
 
 ### component嵌套
 ``` javascript
-<script type="text/jsx">
 var MessageBox = React.createClass({
                     render: function() {
                         var subMessages = [];
@@ -100,14 +99,11 @@ var MessageBox = React.createClass({
                         console.log("render finished.");
                     }
                 );
-</script>
 ```
 注意*SubMessageBox*中的*key*, 在动态循环增加组件的过程中, 要给每一个组件的*key*赋唯一的值, 以保证组件的显示顺序和正确结果.
 
 ### state
 ``` javascript
-<script type="text/jsx">
-
 	var MessageBox = React.createClass({
                     getInitialState: function () {
                         return {count:0,}
@@ -136,6 +132,19 @@ var MessageBox = React.createClass({
                         console.log("render finished.");
                     }
                 );
-</script>
 ```
 注意在给*state*赋值时需要调用setState方法, 不要直接修改state. 每次调用setState都会重绘UI.
+
+### tips
+- 要渲染 HTML 标签，只需在 JSX 里使用小写字母开头的标签名。
+``` javascript  
+var myDivElement = <div className="foo" />;  
+React.render(myDivElement, document.getElementById('example'));
+```
+要渲染 React 组件，只需创建一个大写字母开头的本地变量。
+``` javascript
+var MyComponent = React.createClass({/*...*/});
+var myElement = <MyComponent someProperty={true} />;
+React.render(myElement, document.getElementById('example'));
+``` 
+- 由于**JSX**就是*JavaScript*，一些标识符像*class*和*for*不建议作为*XML*属性名。作为替代，**React** *DOM* 使用*className*和*htmlFor*来做对应的属性。
