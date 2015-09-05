@@ -1,7 +1,7 @@
-title: react-tutorial-3
+title: react入门教程-3
 date: 2015-08-26 22:25:05
 categories: react  
-tags: ['react','javascript','前端']   
+tags: ['react','javascript','前端']
 description:
 ---
 react入门教程-3  
@@ -37,7 +37,7 @@ react入门教程-3
                     },
                     componentWillUnmount: function () {
                         console.log("componentWillUnmount");
-                        clearInterval(this.timer); 
+                        clearInterval(this.timer);
                     },
                     removeComp: function () {
                         React.unmountComponentAtNode(document.getElementById("app"));

@@ -1,4 +1,4 @@
-title: react-tutorial-2  
+title: react入门教程-2  
 date: 2015-08-23 10:17:42  
 categories: react  
 tags: ['react','javascript','前端']  

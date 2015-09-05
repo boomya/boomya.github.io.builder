@@ -1,4 +1,4 @@
-title: react-tutorial-1  
+title: react入门教程-1  
 date: 2015-08-23 10:01:42  
 categories: react  
 tags: ['react','javascript','前端']  
@@ -146,5 +146,5 @@ React.render(myDivElement, document.getElementById('example'));
 var MyComponent = React.createClass({/*...*/});
 var myElement = <MyComponent someProperty={true} />;
 React.render(myElement, document.getElementById('example'));
-``` 
+```
 - 由于**JSX**就是*JavaScript*，一些标识符像*class*和*for*不建议作为*XML*属性名。作为替代，**React** *DOM* 使用*className*和*htmlFor*来做对应的属性。
