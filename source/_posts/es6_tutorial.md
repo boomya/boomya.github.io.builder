@@ -1,4 +1,4 @@
-title: es6_tutorial
+title: ECMAScript 6 入门
 date: 2015-09-10 16:12:27
 categories: javascript
 tags: ['react','javascript','前端','es6']
